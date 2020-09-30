@@ -127,7 +127,6 @@ class _HomeScreenState extends State<HomeScreen>
                     customButton('PROFILE', Icons.person, () {
                       _controller.close();
                     }),
-                    customButton('ABOUT US', Icons.account_balance, () {})
                   ],
                 ),
                 Spacer(),
