@@ -23,3 +23,21 @@ Widget customButton(String title, IconData icon, Function ontap) {
     ),
   );
 }
+
+Widget circleAvatar({@required String image, @required double radius}) {
+  return Container(
+    margin: EdgeInsets.all(10),
+    padding: EdgeInsets.all(2),
+    decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.white,
+        border: Border.all(
+          color: Colors.black38,
+          width: 2,
+        )),
+    child: CircleAvatar(
+      radius: radius,
+      backgroundImage: AssetImage('$image'),
+    ),
+  );
+}

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'configuration.dart';
-// import 'screen2.dart';
+import 'screen2.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -11,27 +10,12 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: MediaQuery.of(context).size.height * .9,
       child: Column(
         children: [
-          // Container(
-          //   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-          //   margin: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-          //   decoration: BoxDecoration(
-          //       color: Colors.white,
-          //       borderRadius: BorderRadius.circular(20)),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       Icon(Icons.search),
-          //       Text('Search pet to adopt'),
-          //       Icon(Icons.settings)
-          //     ],
-          //   ),
-          // ),
-
           Container(
-            //  margin: EdgeInsets.all(10),
-            height: 60,
+            height: MediaQuery.of(context).size.height * .09,
+            margin: EdgeInsets.all(5),
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
@@ -71,15 +55,14 @@ class _MainPageState extends State<MainPage> {
           SizedBox(
             height: 10,
           ),
-
           Container(
-            height: 550,
+            height: MediaQuery.of(context).size.height * .754,
             child: ListView(
               children: [
                 GestureDetector(
                   onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => Screen2()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Screen2()));
                   },
                   child: Container(
                     width: 50,
@@ -89,7 +72,7 @@ class _MainPageState extends State<MainPage> {
                       borderRadius: BorderRadius.circular(20),
                       // boxShadow: shadowList,
                     ),
-                    margin: EdgeInsets.all(20),
+                    margin: EdgeInsets.all(10),
                     child: Row(
                       children: [
                         Container(
@@ -129,9 +112,9 @@ class _MainPageState extends State<MainPage> {
                               borderRadius: BorderRadius.circular(20)),
                           padding: EdgeInsets.all(10),
                           child: Align(child: Image.asset('IMAGES/quest.png')
-                              //  Hero(
-                              //     tag: 1,
-                              //     child: Image.asset('IMAGES/R3.png')),
+                              //child: Image.asset('IMAGES/quest.png')
+                              // child: Hero(
+                              //     tag: 1, child: Image.asset('IMAGES/quest.png')),
                               ),
                         ),
                         Text('QUEST\'20 ')
@@ -140,19 +123,13 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => Screen2()));
-                  },
+                  onTap: () {},
                   child: Container(
                     width: 50,
                     height: 160,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
-                      // boxShadow: shadowList,
                     ),
                     margin: EdgeInsets.all(20),
                     child: Row(
@@ -207,54 +184,6 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                 ),
-                // GestureDetector(
-                //   onTap: () {
-                //     Navigator.push(
-                //         context,
-                //         MaterialPageRoute(
-                //             builder: (context) => Screen2()));
-                //   },
-                //   child: Container(
-                //     //color: Colors.red,
-                //     height: 240,
-                //     margin: EdgeInsets.symmetric(horizontal: 20),
-                //     child: Row(
-                //       children: [
-                //         Expanded(
-                //           child: Stack(
-                //             children: [
-                //               Container(
-                //                 decoration: BoxDecoration(
-                //                   // color: Colors.blueGrey[300],
-                //                   borderRadius:
-                //                       BorderRadius.circular(20),
-                //                   // boxShadow: shadowList,
-                //                 ),
-                //                 margin: EdgeInsets.only(top: 50),
-                //               ),
-                //               Align(
-                //                 child: Hero(
-                //                     tag: 1,
-                //                     child:
-                //                         Image.asset('IMAGES/R3.png')),
-                //               )
-                //             ],
-                //           ),
-                //         ),
-                //         Expanded(
-                //             child: Container(
-                //           margin: EdgeInsets.only(top: 60, bottom: 20),
-                //           decoration: BoxDecoration(
-                //               color: Colors.white,
-                //               boxShadow: shadowList,
-                //               borderRadius: BorderRadius.only(
-                //                   topRight: Radius.circular(20),
-                //                   bottomRight: Radius.circular(20))),
-                //         )),
-                //       ],
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),

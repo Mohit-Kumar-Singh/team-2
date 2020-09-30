@@ -1,7 +1,8 @@
+import 'package:conatus/pages/settings.dart';
 import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:tryy/mainPage.dart';
-import 'package:tryy/search.dart';
+import 'pages/mainPage.dart';
+import 'pages/search.dart';
 import 'widgets.dart';
 
 void main() => runApp(MyApp());
@@ -10,10 +11,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Conatus',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.blueGrey, primaryColor: Colors.blueGrey[800]),
       home: HomeScreen(),
       debugShowCheckedModeBanner: false,
     );
@@ -21,8 +21,6 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key key}) : super(key: key);
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -32,6 +30,8 @@ class _HomeScreenState extends State<HomeScreen>
   FancyDrawerController _controller;
   Widget showpage = MainPage();
   DrawerState state = DrawerState.closed;
+  bool isdraweropen = true;
+  Color brown = Color.fromRGBO(31, 26, 22, 11);
 
   void page(int i) {
     setState(() {
@@ -41,9 +41,9 @@ class _HomeScreenState extends State<HomeScreen>
       if (i == 1) {
         showpage = Search();
       }
-      // if (i== 2) {showpage=
-
-      // }
+      if (i == 3) {
+        showpage = Setting();
+      }
     });
   }
 
@@ -53,15 +53,11 @@ class _HomeScreenState extends State<HomeScreen>
     _controller = FancyDrawerController(
         vsync: this, duration: Duration(milliseconds: 250))
       ..addListener(() {
-        setState(() {});
+        setState(() {
+          // isdraweropen = true;
+        });
       });
   }
-
-  // @override
-  // void dispose() {
-  //   _controller.dispose();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen>
       child: FancyDrawerWrapper(
         itemGap: 00,
         cornerRadius: 40,
-        backgroundColor: Colors.blueGrey[800],
+        backgroundColor: Theme.of(context).primaryColor,
         controller: _controller,
         drawerItems: <Widget>[
           Container(
@@ -95,12 +91,13 @@ class _HomeScreenState extends State<HomeScreen>
                         Text(
                           'Mohit Kumar Singh',
                           style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                            color: Colors.white,
+                          ),
                         ),
                         Text('App Developer',
                             style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
+                              color: Colors.white,
+                            )),
                       ],
                     )
                   ],
@@ -113,18 +110,22 @@ class _HomeScreenState extends State<HomeScreen>
                       'SEARCH',
                       Icons.search,
                       () {
+                        _controller.close();
                         page(1);
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => Calenderpage()));
+                        setState(() {
+                          isdraweropen = true;
+                        });
                       },
                     ),
                     customButton('MEETINGS', Icons.bookmark_border, () {
+                      _controller.close();
                       page(0);
+                      setState(() {
+                        isdraweropen = true;
+                      });
                     }),
                     customButton('PROFILE', Icons.person, () {
-                      initState();
+                      _controller.close();
                     }),
                     customButton('ABOUT US', Icons.account_balance, () {})
                   ],
@@ -135,17 +136,31 @@ class _HomeScreenState extends State<HomeScreen>
                     SizedBox(
                       width: 10,
                     ),
-                    Icon(
-                      Icons.settings,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'Settings',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                    GestureDetector(
+                      onTap: () {
+                        _controller.close();
+                        page(3);
+                        setState(() {
+                          isdraweropen = true;
+                        });
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.settings,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'settings',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
                     ),
                     SizedBox(
                       width: 10,
@@ -169,27 +184,50 @@ class _HomeScreenState extends State<HomeScreen>
             ),
           ),
         ],
+
         child: Scaffold(
             appBar: AppBar(
               shadowColor: Colors.transparent,
-              centerTitle: true,
               elevation: 0,
-              title: Text(
-                "CONATUS",
-                style: TextStyle(color: Colors.black),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  isdraweropen
+                      ? IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isdraweropen = false;
+                              _controller.open();
+                            });
+                          },
+                          icon: Icon(
+                            Icons.menu,
+                            color: Colors.black,
+                          ),
+                        )
+                      : IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isdraweropen = true;
+                              _controller.close();
+                            });
+                          },
+                          icon: Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.black,
+                          ),
+                        ),
+                  Text(
+                    "Conatus",
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.w300),
+                  ),
+                ],
               ),
               backgroundColor: Colors.transparent,
-              leading: IconButton(
-                icon: Icon(
-                  Icons.menu,
-                  color: Colors.black,
-                ),
-                onPressed: () {
-                  _controller.toggle();
-                },
-              ),
             ),
             body: showpage),
+        // ),
       ),
     );
   }
