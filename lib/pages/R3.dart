@@ -7,21 +7,21 @@ class Screen2 extends StatelessWidget {
       child: Scaffold(
         body: Stack(
           children: [
-            Positioned.fill(
-                child: Column(
-              children: [
-                Expanded(
-                  child: Container(
-                    color: Colors.blueGrey[300],
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    color: Colors.white,
-                  ),
-                )
-              ],
-            )),
+            // Positioned.fill(
+            //     child: Column(
+            //   children: [
+            //     Expanded(
+            //       child: Container(
+            //         color: Colors.blueGrey[300],
+            //       ),
+            //     ),
+            //     Expanded(
+            //       child: Container(
+            //         color: Colors.white,
+            //       ),
+            //     )
+            //   ],
+            // )),
             Container(
               margin: EdgeInsets.only(top: 40),
               child: Align(
@@ -43,7 +43,7 @@ class Screen2 extends StatelessWidget {
               margin: EdgeInsets.only(top: 20),
               child: Align(
                 alignment: Alignment.topCenter,
-                child: Hero(tag: 1, child: Image.asset('IMAGES/R3.png')),
+                child: Hero(tag: 1, child: Image.asset('')),
               ),
             ),
             Align(

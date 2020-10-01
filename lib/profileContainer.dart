@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widgets.dart';
+import 'widgets/custombutton.dart';
 
 class ProfileContainer extends StatelessWidget {
   final String name;

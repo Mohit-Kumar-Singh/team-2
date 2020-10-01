@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'screen2.dart';
+
+import 'package:conatus/widgets/eventpost.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -7,6 +8,61 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  // Widget headerTheme(Widget body) {
+  //   return Container(
+  //     alignment: Alignment.center,
+  //     width: double.infinity,
+  //     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+  //     padding: EdgeInsets.symmetric(vertical: 20),
+  //     decoration: BoxDecoration(
+  //       borderRadius: BorderRadius.circular(20),
+  //       color: Colors.black45,
+  //     ),
+  //     child: body,
+  //   );
+  // }
+
+  Widget popUp() {
+    return Dialog(
+      //clipBehavior: Clip.antiAlias,
+      child: Container(
+        padding: EdgeInsets.all(10),
+        // decoration: BoxDecoration(
+        //   borderRadius: BorderRadius.circular(0),
+        // ),
+        height: MediaQuery.of(context).size.height * 0.2,
+        child:
+            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          Text(
+            "September 27, 2020",
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(
+                'Present',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.green,
+                ),
+              ),
+              Text(
+                'Absent',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.red,
+                ),
+              ),
+            ],
+          ),
+        ]),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,18 +73,26 @@ class _MainPageState extends State<MainPage> {
             height: MediaQuery.of(context).size.height * .09,
             margin: EdgeInsets.all(5),
             child: ListView(
+              physics: BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               children: [
-                Container(
-                    width: 150,
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.all(10),
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        //  boxShadow: shadowList,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Text('ATTENDANCE')),
+                GestureDetector(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => popUp());
+                  },
+                  child: Container(
+                      width: 150,
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.all(10),
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          //  boxShadow: shadowList,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Text('ATTENDANCE')),
+                ),
                 Container(
                     width: 150,
                     alignment: Alignment.center,
@@ -52,138 +116,34 @@ class _MainPageState extends State<MainPage> {
               ],
             ),
           ),
-          SizedBox(
-            height: 10,
-          ),
+          // SizedBox(
+          //   height: 10,
+          // ),
           Container(
             height: MediaQuery.of(context).size.height * .754,
             child: ListView(
+              physics: BouncingScrollPhysics(),
               children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Screen2()));
-                  },
-                  child: Container(
-                    width: 50,
-                    height: 160,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      // boxShadow: shadowList,
-                    ),
-                    margin: EdgeInsets.all(10),
-                    child: Row(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20)),
-                          padding: EdgeInsets.all(10),
-                          child: Align(
-                            child: Hero(
-                                tag: 1, child: Image.asset('IMAGES/R3.png')),
-                          ),
-                        ),
-                        Text('R3CURSION')
-                      ],
-                    ),
-                  ),
+                Eventpost(
+                  title: 'R3CURSION',
+                  image: 'IMAGES/R3.png',
+                  ontap: () {},
                 ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => Screen2()));
-                  },
-                  child: Container(
-                    width: 50,
-                    height: 160,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      // boxShadow: shadowList,
-                    ),
-                    margin: EdgeInsets.all(20),
-                    child: Row(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20)),
-                          padding: EdgeInsets.all(10),
-                          child: Align(child: Image.asset('IMAGES/quest.png')
-                              //child: Image.asset('IMAGES/quest.png')
-                              // child: Hero(
-                              //     tag: 1, child: Image.asset('IMAGES/quest.png')),
-                              ),
-                        ),
-                        Text('QUEST\'20 ')
-                      ],
-                    ),
-                  ),
+                Eventpost(
+                  image: 'IMAGES/quest.png',
+                  title: 'QUEST\'20 ',
+                  ontap: () {},
                 ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    width: 50,
-                    height: 160,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    margin: EdgeInsets.all(20),
-                    child: Row(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20)),
-                          padding: EdgeInsets.all(10),
-                          child: Align(
-                              child: Image.asset('IMAGES/doc.png',
-                                  fit: BoxFit.fitWidth)
-                              //  Hero(
-                              //     tag: 1,
-                              //     child: Image.asset('IMAGES/R3.png')),
-                              ),
-                        ),
-                        Text('DAWN OF CRISIS')
-                      ],
-                    ),
-                  ),
+                Eventpost(
+                  title: 'DAWN OF CRISIS',
+                  image: 'IMAGES/doc.png',
+                  ontap: () {},
                 ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => Screen2()));
-                  },
-                  child: Container(
-                    width: 50,
-                    height: 160,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      // boxShadow: shadowList,
-                    ),
-                    margin: EdgeInsets.all(20),
-                    child: Row(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20)),
-                          padding: EdgeInsets.all(10),
-                          child: Align(child: Image.asset('IMAGES/cod.png')
-                              // Hero(
-                              //     tag: 1,
-                              //     child: Image.asset('IMAGES/R3.png')),
-                              ),
-                        ),
-                        Text('COD')
-                      ],
-                    ),
-                  ),
-                ),
+                Eventpost(
+                  image: 'IMAGES/cod.png',
+                  title: 'COD',
+                  ontap: () {},
+                )
               ],
             ),
           ),

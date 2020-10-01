@@ -1,9 +1,10 @@
+import 'package:conatus/pages/Attendance.dart';
 import 'package:conatus/pages/settings.dart';
 import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
 import 'pages/mainPage.dart';
 import 'pages/search.dart';
-import 'widgets.dart';
+import 'widgets/custombutton.dart';
 
 void main() => runApp(MyApp());
 
@@ -36,13 +37,37 @@ class _HomeScreenState extends State<HomeScreen>
   void page(int i) {
     setState(() {
       if (i == 0) {
+        _controller.close();
+
+        setState(() {
+          isdraweropen = true;
+        });
         showpage = MainPage();
       }
       if (i == 1) {
+        _controller.close();
+
+        setState(() {
+          isdraweropen = true;
+        });
         showpage = Search();
       }
       if (i == 3) {
+        _controller.close();
+
+        setState(() {
+          isdraweropen = true;
+        });
         showpage = Setting();
+      }
+
+      if (i == 4) {
+        _controller.close();
+
+        setState(() {
+          isdraweropen = true;
+        });
+        showpage = Attendance();
       }
     });
   }
@@ -53,10 +78,14 @@ class _HomeScreenState extends State<HomeScreen>
     _controller = FancyDrawerController(
         vsync: this, duration: Duration(milliseconds: 250))
       ..addListener(() {
-        setState(() {
-          // isdraweropen = true;
-        });
+        setState(() {});
       });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -79,8 +108,13 @@ class _HomeScreenState extends State<HomeScreen>
                     SizedBox(
                       width: 10,
                     ),
-                    CircleAvatar(
-                      backgroundImage: AssetImage('IMAGES/mypic.jpg'),
+                    GestureDetector(
+                      onTap: () {
+                        page(0);
+                      },
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage('IMAGES/mypic.jpg'),
+                      ),
                     ),
                     SizedBox(
                       width: 10,
@@ -107,26 +141,26 @@ class _HomeScreenState extends State<HomeScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     customButton(
+                      'HOME',
+                      Icons.home,
+                      () {
+                        page(0);
+                      },
+                    ),
+                    customButton('ATTENDANCE', Icons.person_outline, () {
+                      page(4);
+                    }),
+                    customButton(
                       'SEARCH',
                       Icons.search,
                       () {
-                        _controller.close();
                         page(1);
-                        setState(() {
-                          isdraweropen = true;
-                        });
                       },
                     ),
                     customButton('MEETINGS', Icons.bookmark_border, () {
-                      _controller.close();
                       page(0);
-                      setState(() {
-                        isdraweropen = true;
-                      });
                     }),
-                    customButton('PROFILE', Icons.person, () {
-                      _controller.close();
-                    }),
+                    // customButton('PROFILE', Icons.person, () {}),
                   ],
                 ),
                 Spacer(),
@@ -185,6 +219,7 @@ class _HomeScreenState extends State<HomeScreen>
         ],
 
         child: Scaffold(
+            backgroundColor: Colors.blueGrey[100],
             appBar: AppBar(
               shadowColor: Colors.transparent,
               elevation: 0,
