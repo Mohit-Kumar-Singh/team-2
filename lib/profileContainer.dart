@@ -56,20 +56,7 @@ class ProfileContainer extends StatelessWidget {
               skill,
             ),
             Spacer(),
-            GestureDetector(
-              child: Container(
-                alignment: Alignment.center,
-                height: 30,
-                width: 130,
-                child: Text(
-                  'View Profile',
-                  style: TextStyle(color: Colors.white),
-                ),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6),
-                    color: Colors.blueGrey[800]),
-              ),
-            ),
+            smallButton('View Profile', () {}, Colors.blueGrey)
           ],
         ),
       ),

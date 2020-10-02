@@ -4,11 +4,13 @@ class Eventpost extends StatelessWidget {
   final String title;
   final String image;
   final Function ontap;
+  int tag;
 
   Eventpost({
     @required this.title,
     @required this.image,
     this.ontap,
+    @required this.tag,
   });
 
   @override
@@ -34,10 +36,9 @@ class Eventpost extends StatelessWidget {
                 padding: EdgeInsets.all(10),
                 child: Align(
                   child: Hero(
-                      tag: 1,
+                      tag: tag,
                       child: Image.asset(
                         image,
-                        fit: BoxFit.fill,
                       )),
                 ),
               ),

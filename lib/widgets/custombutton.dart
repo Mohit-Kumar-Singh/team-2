@@ -41,3 +41,22 @@ Widget circleAvatar({@required String image, @required double radius}) {
     ),
   );
 }
+
+Widget smallButton(String title, Function ontap, Color color) {
+  color = Colors.blueGrey;
+  return GestureDetector(
+    onTap: ontap,
+    child: Container(
+      margin: EdgeInsets.all(8),
+      alignment: Alignment.center,
+      height: 30,
+      width: 130,
+      child: Text(
+        title,
+        style: TextStyle(color: Colors.white),
+      ),
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(16), color: color),
+    ),
+  );
+}

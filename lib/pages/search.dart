@@ -28,6 +28,7 @@ class Search extends StatelessWidget {
         Container(
           height: 250,
           child: ListView.builder(
+            physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return ProfileContainer(

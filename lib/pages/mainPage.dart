@@ -1,4 +1,7 @@
+import 'package:conatus/pages/R3.dart';
+import 'package:conatus/widgets/custombutton.dart';
 import 'package:flutter/material.dart';
+import 'package:conatus/widgets/popup.dart';
 
 import 'package:conatus/widgets/eventpost.dart';
 
@@ -8,61 +11,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  // Widget headerTheme(Widget body) {
-  //   return Container(
-  //     alignment: Alignment.center,
-  //     width: double.infinity,
-  //     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-  //     padding: EdgeInsets.symmetric(vertical: 20),
-  //     decoration: BoxDecoration(
-  //       borderRadius: BorderRadius.circular(20),
-  //       color: Colors.black45,
-  //     ),
-  //     child: body,
-  //   );
-  // }
-
-  Widget popUp() {
-    return Dialog(
-      //clipBehavior: Clip.antiAlias,
-      child: Container(
-        padding: EdgeInsets.all(10),
-        // decoration: BoxDecoration(
-        //   borderRadius: BorderRadius.circular(0),
-        // ),
-        height: MediaQuery.of(context).size.height * 0.2,
-        child:
-            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          Text(
-            "September 27, 2020",
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(
-                'Present',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.green,
-                ),
-              ),
-              Text(
-                'Absent',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.red,
-                ),
-              ),
-            ],
-          ),
-        ]),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -76,43 +24,116 @@ class _MainPageState extends State<MainPage> {
               physics: BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               children: [
-                GestureDetector(
-                  onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) => popUp());
-                  },
-                  child: Container(
-                      width: 150,
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.all(10),
-                      margin: EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          //  boxShadow: shadowList,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Text('ATTENDANCE')),
+                PopUp(
+                  title: 'ATTENDANCE',
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "September 27, 2020",
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                        // SizedBox(
+                        //   height: 90,
+                        // ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                'Present',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.green,
+                                ),
+                              ),
+                              Text(
+                                'Absent',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]),
                 ),
-                Container(
-                    width: 150,
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.all(10),
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        // boxShadow: shadowList,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Text('QUERY')),
-                Container(
-                    width: 150,
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.all(10),
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        // boxShadow: shadowList,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Text('PROJECT UPDATE')),
+                PopUp(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('Ask a question'),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            decoration: InputDecoration(labelText: 'QUERY'),
+                            maxLines: 1,
+                          ),
+                        ),
+                        smallButton('Submit', () {}, Colors.blueGrey)
+                      ],
+                    ),
+                    title: 'QUERY'),
+                PopUp(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text('Project Update'),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                              //     border: OutlineInputBorder(
+                              //         borderRadius:
+                              //             BorderRadius.all(Radius.circular(20))),
+                              //hintText: '',
+                              labelText: 'Project Name'),
+                          maxLines: 1,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                              // border: OutlineInputBorder(
+                              //     borderRadius:
+                              //         BorderRadius.all(Radius.circular(20))),
+                              //hintText: '',
+                              labelText: 'Project Description'),
+                          maxLines: 1,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                              // border: OutlineInputBorder(
+                              //     borderRadius:
+                              //         BorderRadius.all(Radius.circular(20))),
+                              //hintText: '',
+                              labelText: 'GitHub Link'),
+                          maxLines: 1,
+                        ),
+                      ),
+                      smallButton('Submit', () {}, Colors.blueGrey)
+                    ],
+                  ),
+                  title: 'PROJECT UPDATE',
+                )
               ],
             ),
           ),
@@ -124,24 +145,61 @@ class _MainPageState extends State<MainPage> {
             child: ListView(
               physics: BouncingScrollPhysics(),
               children: [
+                // GestureDetector(
+                //   onTap: () {
+                //     Navigator.push(context,
+                //         MaterialPageRoute(builder: (context) => Screen2()));
+                //   },
+                //   child: Container(
+                //     width: 50,
+                //     height: 160,
+                //     decoration: BoxDecoration(
+                //       color: Colors.white,
+                //       borderRadius: BorderRadius.circular(20),
+                //       // boxShadow: shadowList,
+                //     ),
+                //     margin: EdgeInsets.all(20),
+                //     child: Row(
+                //       children: [
+                //         Container(
+                //           decoration: BoxDecoration(
+                //               borderRadius: BorderRadius.circular(20)),
+                //           padding: EdgeInsets.all(10),
+                //           child: Align(
+                //             child: Hero(
+                //                 tag: 1, child: Image.asset('IMAGES/R3.png')),
+                //           ),
+                //         ),
+                //         Text('R3CURSION')
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 Eventpost(
                   title: 'R3CURSION',
                   image: 'IMAGES/R3.png',
-                  ontap: () {},
+                  tag: 1,
+                  ontap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Screen2()));
+                  },
                 ),
                 Eventpost(
                   image: 'IMAGES/quest.png',
                   title: 'QUEST\'20 ',
+                  tag: 3,
                   ontap: () {},
                 ),
                 Eventpost(
                   title: 'DAWN OF CRISIS',
                   image: 'IMAGES/doc.png',
+                  tag: 4,
                   ontap: () {},
                 ),
                 Eventpost(
                   image: 'IMAGES/cod.png',
                   title: 'COD',
+                  tag: 5,
                   ontap: () {},
                 )
               ],

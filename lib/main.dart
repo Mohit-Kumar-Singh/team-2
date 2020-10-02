@@ -150,6 +150,9 @@ class _HomeScreenState extends State<HomeScreen>
                     customButton('ATTENDANCE', Icons.person_outline, () {
                       page(4);
                     }),
+                    customButton('MEETINGS', Icons.bookmark_border, () {
+                      page(0);
+                    }),
                     customButton(
                       'SEARCH',
                       Icons.search,
@@ -157,10 +160,6 @@ class _HomeScreenState extends State<HomeScreen>
                         page(1);
                       },
                     ),
-                    customButton('MEETINGS', Icons.bookmark_border, () {
-                      page(0);
-                    }),
-                    // customButton('PROFILE', Icons.person, () {}),
                   ],
                 ),
                 Spacer(),
@@ -219,6 +218,7 @@ class _HomeScreenState extends State<HomeScreen>
         ],
 
         child: Scaffold(
+            resizeToAvoidBottomInset: false,
             backgroundColor: Colors.blueGrey[100],
             appBar: AppBar(
               shadowColor: Colors.transparent,
